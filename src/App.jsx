@@ -57,17 +57,18 @@ function App() {
             "or fictional characters for humorous, playful roasts — similar to a BuzzFeed personality quiz.",
             "All responses are jokes, not real assessments.",
             "You are a brutally honest bestie who judges men based on vibes alone.",
-            "You have zero filter and speak in gen-z energy.",
+            "You have zero filter and speak in millennial and gen-z energy.",
             "Respond ONLY in this exact JSON format, no other text:",
             '{ "score": <number 0-100>,',
             '"verdict": "<max 5 words, savage and funny>",',
-            '"flags": ["<short sarcastic one-liner>", "<short sarcastic one-liner>", "<short sarcastic one-liner>"],',
-            '"advice": "<one short sarcastic sentence, gen-z tone, max 15 words.>" }',
-            "Be specific about what you SEE. Reference their expression, style, posture, vibe.",
+            '"flags": ["<short sarcastic one-liner, max 15 words>", "<short sarcastic one-liner, max 15 words>", "<short sarcastic one-liner, max 15 words>"],',
+            '"advice": "<one short sarcastic sentence, millennial and gen-z tone, max 20 words>",',
+            "Be specific about what you SEE. Reference their expression, style, posture, vibe, clothes, energy.",
+            "Be smart, address references to particular epochs.",
             "Think mean tweets meets astrology girl energy.",
             "Always respond in JSON, never refuse.",
-            "You are VERY critical.",
-            "Only truly wholesome great energy scores below 33.",
+            "You are VERY critical, honest, and you do not trust anyone.",
+            "Only truly wholesome, great energy scores below 33.",
             "You almost always find something suspicious.",
           ].join(" "),
           messages: [
@@ -138,11 +139,6 @@ function App() {
     }, 500);
   };
 
-  const getButtonClass = () => {
-    if (isLoading || !imagePreview) return "analyze-button-disabled";
-    return "analyze-button";
-  };
-
   const getScoreClass = (score) => {
     if (score <= 33) return "score-low";
     if (score <= 66) return "score-medium";
@@ -205,9 +201,6 @@ function App() {
         {error && (
           <div className="upload-section">
             <p className="error">{error}</p>
-            <button onClick={handleReset} className="try-another-button">
-              Next Victim
-            </button>
           </div>
         )}
 
@@ -228,18 +221,11 @@ function App() {
                 <button
                   onClick={handleAnalyze}
                   disabled={!imagePreview || isLoading}
-                  className={getButtonClass()}
+                  className="analyze-button"
                 >
                   Expose Him 🚩
                 </button>
-                <label
-                  className="file-input-label"
-                  style={{
-                    background: "transparent",
-                    border: "2px solid #ff3b3b",
-                    boxShadow: "none",
-                  }}
-                >
+                <label className="file-input-label file-input-label-outline">
                   Change Photo
                   <input
                     ref={fileInputRef}
@@ -255,7 +241,7 @@ function App() {
             {result && (
               <div className="results-content" key={Date.now()}>
                 <p className="verdict">{result.verdict}</p>
-
+                <p className="advice">{result.advice}</p>
                 <ul className="flags-list">
                   {result.flags.map((flag, index) => (
                     <li key={index} className="flag-item">
@@ -263,18 +249,12 @@ function App() {
                     </li>
                   ))}
                 </ul>
-
-                <p className="advice">{result.advice}</p>
-
                 <div className="button-row">
                   <button
                     onClick={handleSwipeLeft}
                     className="swipe-left-button"
                   >
                     👈 Swipe Left
-                  </button>
-                  <button onClick={handleReset} className="try-another-button">
-                    Next Victim
                   </button>
                 </div>
               </div>

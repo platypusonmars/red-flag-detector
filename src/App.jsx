@@ -62,7 +62,7 @@ function App() {
             '{ "score": <number 0-100>,',
             '"verdict": "<max 5 words, savage and funny>",',
             '"flags": ["<short sarcastic one-liner, max 15 words>", "<short sarcastic one-liner, max 15 words>", "<short sarcastic one-liner, max 15 words>"],',
-            '"advice": "<one short sarcastic sentence, millennial and gen-z tone, max 20 words>",',
+            '"advice": "<one short sarcastic sentence, millennial and gen-z tone, max 20 words>" }',
             "Be specific about what you SEE. Reference their expression, style, posture, vibe, clothes, energy.",
             "Be smart, address references to particular epochs.",
             "Think mean tweets meets astrology girl energy.",
@@ -207,6 +207,7 @@ function App() {
         {imagePreview && !isLoading && !error && (
           <div className={`photo-card ${isSwiping ? "swiping" : ""}`}>
             <div className="preview-container">
+              {/* ICK */}
               <img src={imagePreview} alt="Preview" className="preview-image" />
               {result && (
                 <div className={`score-stamp ${getScoreClass(result.score)}`}>
@@ -216,6 +217,7 @@ function App() {
               )}
             </div>
 
+            {/* Buttons and image preview */}
             {!result && (
               <div className="upload-section">
                 <button
